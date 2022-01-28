@@ -1,0 +1,56 @@
+{
+    "name": "TestInputs",
+    "maps": [
+        {
+            "name": "FirstTest",
+            "id": "3650f78c-8591-496f-8e05-c77f05faad53",
+            "actions": [
+                {
+                    "name": "DetectInput",
+                    "type": "Button",
+                    "id": "cdb63c96-643b-48b6-958b-1dcee17227e6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c629cdb5-9619-40fe-9777-83cf463ec253",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DetectInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a974297-f07d-4f45-bcac-210645ed26e1",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DetectInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "31e3541c-42a5-42fd-ae75-df0851310f60",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DetectInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
