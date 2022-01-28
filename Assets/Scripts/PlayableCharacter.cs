@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayableCharacter : MonoBehaviour
 {
+    //This is the character's name that will be used for, like, uh, I don't know
+    [SerializeField]
+    private string m_CharacterName = string.Empty;
     //This is the main input of that character
     //The only keyboard key that will act on him
     private InputControl m_MainControl = null;
@@ -13,7 +16,7 @@ public class PlayableCharacter : MonoBehaviour
 
     public void InputPressed()
     {
-        Destroy(this.gameObject);
+        Debug.Log(m_MainControl);
     }
 
 }
