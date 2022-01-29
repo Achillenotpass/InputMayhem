@@ -8,10 +8,13 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField]
     private CharactersManager m_CharactersManager = null;
+    //timer global, permet de stocker le score
     private float m_Timer;
 
+    //on stocke le nombre d'orbes prises
     private int m_CalmOrbs, m_ChaosOrbs = 0;
 
+    //permet de savoir si on doit additioner ou soustraire a la valeur de la jauge
     private bool ChaosGrowing = false;
 
     [SerializeField]
@@ -20,12 +23,15 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Slider m_slider;
 
+    //la première valeur représente l'augmentation, la deuxième en combien de temps cette augmentation prend place
     [SerializeField]
     private Vector2 m_GaugeMovingValue;
 
+    //la valeur d'augmentation augmente elle meme avec le temps
     [SerializeField]
     private float m_GaugeValueIncrease = 10;
 
+    //différence entre les orbes collectées avant que la jauge change de sens
     [SerializeField]
     private int m_orbsDifference = 2;
 
