@@ -38,6 +38,38 @@ public class PlayableCharacter : MonoBehaviour
         Move(m_CurrentInputCount);
     }
 
+    void UpdatePlayerOnGrid(int p_X, int p_Y)
+    {
+        m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
+        int l_nextCaseX = (int)(transform.position.x / m_GridManager.m_GridOffset) + p_X;
+        int l_nextCaseY = (int)(transform.position.z / m_GridManager.m_GridOffset) + p_Y;
+        CaseState l_NextCase = m_GridManager.getCaseState(l_nextCaseX, l_nextCaseY);
+        if (l_NextCase == CaseState.OrbeCalme || l_NextCase == CaseState.OrbeChaos)
+        {
+            OrbScript[] l_Orbs = GameObject.FindObjectsOfType<OrbScript>();
+            foreach (OrbScript l_OrbScript in l_Orbs)
+            {
+                if (l_OrbScript.m_X == l_nextCaseX && l_OrbScript.m_Y == l_nextCaseY)
+                {
+                    l_OrbScript.Taken();
+                    break;
+                }
+            }
+        }
+        m_GridManager.MakePlayer(l_nextCaseX, l_nextCaseY);
+    }
+
+    bool caseNotPlayer(int p_X, int p_Y)
+    {
+        int l_X = (int)(transform.position.x / m_GridManager.m_GridOffset) + p_X;
+        int l_Y = (int)(transform.position.z / m_GridManager.m_GridOffset) + p_Y;
+        if (m_GridManager.getCaseState(l_X, l_Y) == CaseState.Player)
+        {
+            return false;
+        }
+        return true;
+    }
+
     private void Move(int p_InputCount)
     {
         Direction l_MoveDirection = m_DirectionManager.GetDirectionFromInput(p_InputCount);
@@ -45,24 +77,46 @@ public class PlayableCharacter : MonoBehaviour
         switch (l_MoveDirection)
         {
             case Direction.Up:
-                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
-                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset) + 1);
-                transform.Translate(Vector3.forward * m_GridManager.m_GridOffset);
+                Debug.Log((int)(transform.position.z / m_GridManager.m_GridOffset));
+                if ((int)(transform.position.z / m_GridManager.m_GridOffset) < m_GridManager.m_GridSize - 1)
+                {
+                    if (caseNotPlayer(0, 1))
+                    {
+                        UpdatePlayerOnGrid(0, 1);
+                        transform.Translate(Vector3.forward * m_GridManager.m_GridOffset);
+                    }
+                }
                 break;
             case Direction.Down:
-                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
-                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset) - 1);
-                transform.Translate(Vector3.back * m_GridManager.m_GridOffset);
+                Debug.Log((int)(transform.position.z / m_GridManager.m_GridOffset));
+                if ((int)(transform.position.z / m_GridManager.m_GridOffset) > 0)
+                {
+                    if (caseNotPlayer(0, -1))
+                    {
+                        UpdatePlayerOnGrid(0, -1);
+                        transform.Translate(Vector3.back * m_GridManager.m_GridOffset);
+                    } 
+                }
                 break;
             case Direction.Left:
-                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
-                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset) - 1, (int)(transform.position.z / m_GridManager.m_GridOffset));
-                transform.Translate(Vector3.left * m_GridManager.m_GridOffset);
+                if ((int)(transform.position.x / m_GridManager.m_GridOffset) > 0)
+                {
+                    if (caseNotPlayer(-1, 0))
+                    {
+                        UpdatePlayerOnGrid(-1, 0);
+                        transform.Translate(Vector3.left * m_GridManager.m_GridOffset);
+                    }
+                }
                 break;
             case Direction.Right:
-                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
-                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset) + 1, (int)(transform.position.z / m_GridManager.m_GridOffset));
-                transform.Translate(Vector3.right * m_GridManager.m_GridOffset);
+                if ((int)(transform.position.x / m_GridManager.m_GridOffset) < m_GridManager.m_GridSize - 1)
+                {
+                    if (caseNotPlayer(1, 0))
+                    {
+                        UpdatePlayerOnGrid(1, 0);
+                        transform.Translate(Vector3.right * m_GridManager.m_GridOffset);
+                    }
+                } 
                 break;
             default:
                 break;
