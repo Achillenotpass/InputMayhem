@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class CharactersManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject m_GameOverUI = null;
     private GameState m_CurrentGameState = GameState.WaitingForPlayers;
     public GameState a_CurrentGameState 
     { set 
@@ -14,7 +16,15 @@ public class CharactersManager : MonoBehaviour
             m_CurrentGameState = value;
             if (m_CurrentGameState != GameState.Playing)
             {
+                if (m_CurrentGameState == GameState.GameLost)
+                {
+                    m_GameOverUI.SetActive(true);
+                }
                 m_GridManager.StopGame();
+            }
+            else
+            {
+                m_GameOverUI.SetActive(false);
             }
         } 
         get { return m_CurrentGameState; } 

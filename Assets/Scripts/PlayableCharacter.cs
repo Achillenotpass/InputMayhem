@@ -26,17 +26,6 @@ public class PlayableCharacter : MonoBehaviour
     private void Awake()
     {
         m_Animator = GetComponentInChildren<Animator>();
-
-        int oui = 0;
-
-        switch (oui)
-        {
-            case 1:
-                break;
-            case 2:
-                break;
-        }
-
     }
 
     public void InputPressed()
@@ -92,8 +81,6 @@ public class PlayableCharacter : MonoBehaviour
 
     private void Move(int p_InputCount)
     {
-        m_IsMoving = true;
-
         Direction l_MoveDirection = m_DirectionManager.GetDirectionFromInput(p_InputCount);
         m_CurrentInputCount = 0;
         switch (l_MoveDirection)
@@ -148,10 +135,12 @@ public class PlayableCharacter : MonoBehaviour
     }
     private IEnumerator MovementAnimation(Vector3Int p_Direction)
     {
-        float l_AnimationTime = 0.5f;
+        m_IsMoving = true;
+
+        float l_AnimationTime = 0.3f;
         float l_Timer = 0.0f;
         m_Animator.SetTrigger("Jump");
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
         UpdatePlayerOnGrid(p_Direction.x, p_Direction.z);
         
         while (l_Timer < l_AnimationTime)
