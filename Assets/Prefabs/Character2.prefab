@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 268721976472419669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 3727033154009427297}
   m_RootOrder: 0
@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3727033154009427297}
   - component: {fileID: 3727033154009427298}
+  - component: {fileID: 1655404434006130116}
   m_Layer: 0
   m_Name: Character2
   m_TagString: Untagged
@@ -140,3 +141,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CharacterName: Character2
+--- !u!114 &1655404434006130116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727033154009427300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f9d44f34869a8ae4588937ecd9ad5190, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18a29a59-c09b-4f52-a6cf-c1f2f973d2e9
+    m_ActionName: PlayerManager/StartGame[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3727033154009427298}
+        m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
+        m_MethodName: InputPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 34ec90bb-f61e-4fe6-acf8-15daaa962bd4
+    m_ActionName: PlayerCharacter/MainInput[/Keyboard/q,/Keyboard/w,/Keyboard/e,/Keyboard/r,/Keyboard/t,/Keyboard/y,/Keyboard/u,/Keyboard/i,/Keyboard/o,/Keyboard/p,/Keyboard/a,/Keyboard/s,/Keyboard/d,/Keyboard/f,/Keyboard/g,/Keyboard/h,/Keyboard/j,/Keyboard/k,/Keyboard/l,/Keyboard/semicolon,/Keyboard/z,/Keyboard/x,/Keyboard/c,/Keyboard/v,/Keyboard/b,/Keyboard/n,/Keyboard/m,/Keyboard/comma,/Keyboard/period,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0,/Keyboard/minus]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 773b8f10-2744-4fa9-af87-9eb988193e50
+    m_ActionName: PlayerManager/Player1[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a66fe1e-5b4c-4173-98a8-e28340dc7db0
+    m_ActionName: PlayerManager/Player2[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9cef790a-b8f5-4d85-853e-7823cc5f8b8d
+    m_ActionName: PlayerManager/Player3[/Keyboard/n]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ed464a3-25ce-4f70-a9ea-e64d77e7b736
+    m_ActionName: PlayerManager/Player4[/Keyboard/p]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerCharacter
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -20,7 +20,7 @@ public class PlayableCharacter : MonoBehaviour
     private int m_CurrentInputCount = 0;
 
     private List<Coroutine> m_RunningCoroutines = new List<Coroutine>();
-  
+
 
     public void InputPressed()
     {

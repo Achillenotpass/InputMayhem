@@ -128,7 +128,6 @@ public class TimeManager : MonoBehaviour
 
     private void LoseGame()
     {
-        Debug.Log("oui");
         m_CharactersManager.a_CurrentGameState = CharactersManager.GameState.GameLost;
     }
 
