@@ -29,8 +29,23 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private int m_orbsDifference = 2;
 
+    [SerializeField]
+    private Light m_DirectionalLight;
+
     [Range(0, 100)]
     private float m_GaugeValue = 50;
+
+    private Gradient m_Gradient;
+
+    [SerializeField]
+    private Color m_ChaosColor;
+
+    [SerializeField]
+    private Color m_CalmColor;
+
+    private GradientColorKey[] m_ColorKey;
+
+    private GradientAlphaKey[] m_AlphaKey;
 
     //placeholder
     public bool addChaos = false;
@@ -42,12 +57,29 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_Gradient = new Gradient();
+        m_ColorKey = new GradientColorKey[2];
+        m_ColorKey[0].color = m_ChaosColor;
+        m_ColorKey[0].time = 0f;
+        m_ColorKey[1].color = m_CalmColor;
+        m_ColorKey[1].time = 1f;
+
+        m_AlphaKey = new GradientAlphaKey[2];
+        m_AlphaKey[0].alpha = 1.0f;
+        m_AlphaKey[0].time = 1.0f;
+        m_AlphaKey[1].alpha = 1.0f;
+        m_AlphaKey[1].time = 1.0f;
+
+        m_Gradient.SetKeys(m_ColorKey, m_AlphaKey);
+
+        m_DirectionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        m_DirectionalLight.color = m_Gradient.Evaluate(m_GaugeValue / 100f);
+
         switch (m_CharactersManager.a_CurrentGameState)
         {
             case CharactersManager.GameState.WaitingForPlayers:
@@ -145,6 +177,14 @@ public class TimeManager : MonoBehaviour
             addToGaugeValue(-addValue);
             addChaos = false;
         }
+
+        /*
+        m_ColorKey[0].color = m_ChaosColor;
+
+        m_ColorKey[1].color = m_CalmColor;
+
+        m_Gradient.SetKeys(m_ColorKey, m_AlphaKey);
+        */
     }
 
 }
