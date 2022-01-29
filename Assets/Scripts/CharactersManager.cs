@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CharactersManager : MonoBehaviour
 {
+    [SerializeField]
+    private DirectionManager m_DirectionManager = null;
     private Dictionary<InputControl, PlayableCharacter> m_CharactersList = new Dictionary<InputControl, PlayableCharacter>();
     [SerializeField]
     private List<GameObject> m_CharactersPrefabs = null;
@@ -29,7 +31,9 @@ public class CharactersManager : MonoBehaviour
                     PlayerInput l_NewPlayer = PlayerInput.Instantiate(m_CharactersPrefabs[m_CurrentPlayerCount]);
                     PlayableCharacter l_NewCharacter = l_NewPlayer.GetComponent<PlayableCharacter>();
                     //Assign it his input (which the one that was just pressed)
-                    l_NewCharacter.MainControl = p_Context.control;
+                    l_NewCharacter.a_MainControl = p_Context.control;
+                    //Give it a ref to the DirectionManager asset
+                    l_NewCharacter.a_DirectionManager = m_DirectionManager;
                     //And add it to the list of existing PlayableCharacters
                     m_CharactersList.Add(p_Context.control, l_NewCharacter);
 
