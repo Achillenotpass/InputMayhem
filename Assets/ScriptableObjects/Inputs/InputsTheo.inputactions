@@ -1,0 +1,34 @@
+{
+    "name": "InputsTheo",
+    "maps": [
+        {
+            "name": "Test1",
+            "id": "6dac30e3-9df7-4b8a-9183-b7fc2c8a0d7e",
+            "actions": [
+                {
+                    "name": "AddPlayer",
+                    "type": "Button",
+                    "id": "34a1a7c2-1a1a-498e-ba6b-182efe7babdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b78c68d1-92db-40d1-a506-e20d1dbeb75c",
+                    "path": "<Keyboard>/j",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddPlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

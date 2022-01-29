@@ -48,6 +48,17 @@
                     "action": "DetectInput",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c24afe1-6b9e-482e-b052-85e7fee9a799",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DetectInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
