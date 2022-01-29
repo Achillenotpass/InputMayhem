@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9378ffff95d114dbd32aaa5d493829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DirectionManager: {fileID: 11400000, guid: 35d5d31781f8787468d661ec29a5db79, type: 2}
   m_CharactersPrefabs:
   - {fileID: 3727033154009427300, guid: f9ef6bc3d0e7d294d8f75008b862fab0, type: 3}
   - {fileID: 3727033154009427300, guid: c560430509367d8408befbf00a3b5e95, type: 3}
