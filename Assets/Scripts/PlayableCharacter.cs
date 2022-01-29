@@ -12,24 +12,44 @@ public class PlayableCharacter : MonoBehaviour
     public DirectionManager a_DirectionManager { set { m_DirectionManager = value; } get { return m_DirectionManager; } }
     private GridManager m_GridManager = null;
     public GridManager a_GridManager { set { m_GridManager = value; } get { return m_GridManager; } }
+    private Animator m_Animator = null;
     //This is the main input of that character
     //The only keyboard key that will act on him
     private InputControl m_MainControl = null;
     public InputControl a_MainControl { set { m_MainControl = value; } get { return m_MainControl; } }
     private float m_MaxTimeBetweenInputs = 0.2f;
     private int m_CurrentInputCount = 0;
+    private bool m_IsMoving = false;
 
     private List<Coroutine> m_RunningCoroutines = new List<Coroutine>();
 
+    private void Awake()
+    {
+        m_Animator = GetComponentInChildren<Animator>();
+
+        int oui = 0;
+
+        switch (oui)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+
+    }
 
     public void InputPressed()
     {
-        foreach (Coroutine Coroutine in m_RunningCoroutines)
+        if (!m_IsMoving)
         {
-            StopCoroutine(Coroutine);
+            foreach (Coroutine Coroutine in m_RunningCoroutines)
+            {
+                StopCoroutine(Coroutine);
+            }
+            m_CurrentInputCount = m_CurrentInputCount + 1;
+            m_RunningCoroutines.Add(StartCoroutine(CheckInputDelay(m_MaxTimeBetweenInputs)));
         }
-        m_CurrentInputCount = m_CurrentInputCount + 1;
-        m_RunningCoroutines.Add(StartCoroutine(CheckInputDelay(m_MaxTimeBetweenInputs)));
     }
 
     private IEnumerator CheckInputDelay(float p_MaxTimeBetweenInputs)
@@ -72,6 +92,8 @@ public class PlayableCharacter : MonoBehaviour
 
     private void Move(int p_InputCount)
     {
+        m_IsMoving = true;
+
         Direction l_MoveDirection = m_DirectionManager.GetDirectionFromInput(p_InputCount);
         m_CurrentInputCount = 0;
         switch (l_MoveDirection)
@@ -80,10 +102,10 @@ public class PlayableCharacter : MonoBehaviour
                 Debug.Log((int)(transform.position.z / m_GridManager.m_GridOffset));
                 if ((int)(transform.position.z / m_GridManager.m_GridOffset) < m_GridManager.m_GridSize - 1)
                 {
-                    if (caseNotPlayer(0, 1))
+                    if (caseNotPlayer(Vector3Int.forward.x, Vector3Int.forward.z))
                     {
-                        UpdatePlayerOnGrid(0, 1);
-                        transform.Translate(Vector3.forward * m_GridManager.m_GridOffset);
+                        StartCoroutine(MovementAnimation(Vector3Int.forward));
+                        break;
                     }
                 }
                 break;
@@ -91,36 +113,56 @@ public class PlayableCharacter : MonoBehaviour
                 Debug.Log((int)(transform.position.z / m_GridManager.m_GridOffset));
                 if ((int)(transform.position.z / m_GridManager.m_GridOffset) > 0)
                 {
-                    if (caseNotPlayer(0, -1))
+                    if (caseNotPlayer(Vector3Int.back.x, Vector3Int.back.z))
                     {
-                        UpdatePlayerOnGrid(0, -1);
-                        transform.Translate(Vector3.back * m_GridManager.m_GridOffset);
+                        StartCoroutine(MovementAnimation(Vector3Int.back));
+                        break;
                     } 
                 }
                 break;
             case Direction.Left:
                 if ((int)(transform.position.x / m_GridManager.m_GridOffset) > 0)
                 {
-                    if (caseNotPlayer(-1, 0))
+                    transform.GetChild(0).GetChild(0).localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    if (caseNotPlayer(Vector3Int.left.x, Vector3Int.left.z))
                     {
-                        UpdatePlayerOnGrid(-1, 0);
-                        transform.Translate(Vector3.left * m_GridManager.m_GridOffset);
+                        StartCoroutine(MovementAnimation(Vector3Int.left));
+                        break;
                     }
                 }
                 break;
             case Direction.Right:
                 if ((int)(transform.position.x / m_GridManager.m_GridOffset) < m_GridManager.m_GridSize - 1)
                 {
-                    if (caseNotPlayer(1, 0))
+                    transform.GetChild(0).GetChild(0).localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                    if (caseNotPlayer(Vector3Int.right.x, Vector3Int.right.z))
                     {
-                        UpdatePlayerOnGrid(1, 0);
-                        transform.Translate(Vector3.right * m_GridManager.m_GridOffset);
+                        StartCoroutine(MovementAnimation(Vector3Int.right));
+                        break;
                     }
                 } 
                 break;
             default:
                 break;
         }
+    }
+    private IEnumerator MovementAnimation(Vector3Int p_Direction)
+    {
+        float l_AnimationTime = 0.5f;
+        float l_Timer = 0.0f;
+        m_Animator.SetTrigger("Jump");
+        yield return new WaitForSeconds(0.2f);
+        UpdatePlayerOnGrid(p_Direction.x, p_Direction.z);
+        
+        while (l_Timer < l_AnimationTime)
+        {
+            transform.Translate((Vector3)p_Direction * m_GridManager.m_GridOffset * Time.deltaTime / l_AnimationTime);
+            l_Timer = l_Timer + Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = new Vector3(Mathf.Round(transform.position.x), 0.0f, Mathf.Round(transform.position.z));
+        m_IsMoving = false;
     }
 
 }
