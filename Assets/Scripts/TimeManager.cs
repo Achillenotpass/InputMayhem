@@ -35,22 +35,21 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private int m_orbsDifference = 2;
 
+    //la lumiere va changer suivant le niveau de la jauge
     [SerializeField]
     private Light m_DirectionalLight;
 
+    //valeur de la jauge
     [Range(0, 100)]
     private float m_GaugeValue = 50;
 
+    //gestion de la lumière
     private Gradient m_Gradient;
-
     [SerializeField]
     private Color m_ChaosColor;
-
     [SerializeField]
     private Color m_CalmColor;
-
     private GradientColorKey[] m_ColorKey;
-
     private GradientAlphaKey[] m_AlphaKey;
 
     //placeholder
@@ -63,6 +62,7 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //on crée le gradient et l'associe a la directional light
         m_Gradient = new Gradient();
         m_ColorKey = new GradientColorKey[2];
         m_ColorKey[0].color = m_ChaosColor;
@@ -84,6 +84,7 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //la couleur de la light change
         m_DirectionalLight.color = m_Gradient.Evaluate(m_GaugeValue / 100f);
 
         switch (m_CharactersManager.a_CurrentGameState)
