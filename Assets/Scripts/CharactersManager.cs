@@ -101,7 +101,7 @@ public class CharactersManager : MonoBehaviour
             else if (m_CurrentPlayerCount != m_CharactersPrefabs.Count)
             {
                 //Else we spawn a new PlayableCharacter
-                PlayerInput l_NewPlayer = PlayerInput.Instantiate(m_CharactersPrefabs[m_CurrentPlayerCount]);
+                GameObject l_NewPlayer = Instantiate(m_CharactersPrefabs[m_CurrentPlayerCount]);
                 PlayableCharacter l_NewCharacter = l_NewPlayer.GetComponent<PlayableCharacter>();
 
                 //Assign it his input (which the one that was just pressed)
