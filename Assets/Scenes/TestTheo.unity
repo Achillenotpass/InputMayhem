@@ -1010,7 +1010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 311.09}
+  m_AnchoredPosition: {x: 0, y: 208}
   m_SizeDelta: {x: 160, y: 54.7457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2008663349
@@ -1091,8 +1091,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000094516, y: 263.1}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: -0.000015259, y: 174.00002}
+  m_SizeDelta: {x: 423.9513, y: 52.9939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081174098
 MonoBehaviour:
@@ -1155,7 +1155,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2109868195}
   - component: {fileID: 2109868194}
-  - component: {fileID: 2109868196}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -1184,7 +1183,7 @@ MonoBehaviour:
   m_Mat_Empty: {fileID: 2100000, guid: d567da34be38b2d4da6d605489ac046b, type: 2}
   m_ChaosOrb: {fileID: 153456899308493160, guid: 30862beef9f0c694580680b12f59687c, type: 3}
   m_CalmOrb: {fileID: 611651307746251749, guid: a2be40e4845d7d44488099bdeeaadff8, type: 3}
-  m_OrbLifeSpan: 2
+  m_OrbLifeSpan: 60
   m_OrbLifeSpanRand: 1
   addPlayer: 0
   CaseFree: 0
@@ -1204,49 +1203,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2109868196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109868193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 52f46b5321cc9344a81193f5258a034f, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2109868194}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: tamerInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 34a1a7c2-1a1a-498e-ba6b-182efe7babdd
-    m_ActionName: Test1/AddPlayer
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Test1
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}

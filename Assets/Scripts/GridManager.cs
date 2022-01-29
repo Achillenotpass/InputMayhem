@@ -20,8 +20,7 @@ public class GridManager : MonoBehaviour
 
     private GameObject[,] m_ObjGrid;
 
-    [SerializeField]
-    private int m_GridSize = 10;
+    public int m_GridSize = 10;
 
     public int m_GridOffset = 1;
 
