@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a9a651f84cf964e9ca354a402bebc3, type: 3}
   m_Name: DirectionManager
   m_EditorClassIdentifier: 
-  InputDirection: 00000000010000000200000003000000
+  InputDirection: 00000000030000000100000002000000

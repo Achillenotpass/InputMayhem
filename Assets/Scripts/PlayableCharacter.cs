@@ -10,6 +10,8 @@ public class PlayableCharacter : MonoBehaviour
     private string m_CharacterName = string.Empty;
     private DirectionManager m_DirectionManager = null;
     public DirectionManager a_DirectionManager { set { m_DirectionManager = value; } get { return m_DirectionManager; } }
+    private GridManager m_GridManager = null;
+    public GridManager a_GridManager { set { m_GridManager = value; } get { return m_GridManager; } }
     //This is the main input of that character
     //The only keyboard key that will act on him
     private InputControl m_MainControl = null;
@@ -43,21 +45,28 @@ public class PlayableCharacter : MonoBehaviour
         switch (l_MoveDirection)
         {
             case Direction.Up:
-                transform.Translate(Vector3.up);
+                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
+                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset) + 1);
+                transform.Translate(Vector3.forward * m_GridManager.m_GridOffset);
                 break;
             case Direction.Down:
-                transform.Translate(Vector3.down);
+                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
+                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset) - 1);
+                transform.Translate(Vector3.back * m_GridManager.m_GridOffset);
                 break;
             case Direction.Left:
-                transform.Translate(Vector3.left);
+                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
+                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset) - 1, (int)(transform.position.z / m_GridManager.m_GridOffset));
+                transform.Translate(Vector3.left * m_GridManager.m_GridOffset);
                 break;
             case Direction.Right:
-                transform.Translate(Vector3.right);
+                m_GridManager.MakeEmpty((int)(transform.position.x / m_GridManager.m_GridOffset), (int)(transform.position.z / m_GridManager.m_GridOffset));
+                m_GridManager.MakePlayer((int)(transform.position.x / m_GridManager.m_GridOffset) + 1, (int)(transform.position.z / m_GridManager.m_GridOffset));
+                transform.Translate(Vector3.right * m_GridManager.m_GridOffset);
                 break;
             default:
                 break;
         }
-        Debug.Log(l_MoveDirection);
     }
 
 }

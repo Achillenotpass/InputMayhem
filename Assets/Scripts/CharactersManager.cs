@@ -7,6 +7,8 @@ public class CharactersManager : MonoBehaviour
 {
     [SerializeField]
     private DirectionManager m_DirectionManager = null;
+    [SerializeField]
+    private GridManager m_GridManager = null;
     private Dictionary<InputControl, PlayableCharacter> m_CharactersList = new Dictionary<InputControl, PlayableCharacter>();
     [SerializeField]
     private List<GameObject> m_CharactersPrefabs = null;
@@ -34,8 +36,15 @@ public class CharactersManager : MonoBehaviour
                     l_NewCharacter.a_MainControl = p_Context.control;
                     //Give it a ref to the DirectionManager asset
                     l_NewCharacter.a_DirectionManager = m_DirectionManager;
+                    //Give it a ref to the GridManager
+                    l_NewCharacter.a_GridManager = m_GridManager;
                     //And add it to the list of existing PlayableCharacters
                     m_CharactersList.Add(p_Context.control, l_NewCharacter);
+
+                    //SPAWNING CHARACTER
+                    l_NewCharacter.a_GridManager.MakePlayer(5, 5);
+                    l_NewCharacter.transform.position = l_NewCharacter.a_GridManager.m_GridOffset * new Vector3(5, 0, 5);
+
 
                     //Then we call the function for newly joined players
                     NewPlayerJoined(l_NewCharacter);

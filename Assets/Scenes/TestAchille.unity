@@ -206,106 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &979721773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 979721776}
-  - component: {fileID: 979721774}
-  - component: {fileID: 979721775}
-  m_Layer: 0
-  m_Name: CharactersManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &979721774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979721773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f9d44f34869a8ae4588937ecd9ad5190, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 979721775}
-        m_TargetAssemblyTypeName: CharactersManager, Assembly-CSharp
-        m_MethodName: CreateCharacter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 381dedf2-2262-45f6-abb4-f080f90006b7
-    m_ActionName: PlayerManager/JoinGame[/Keyboard/anyKey]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 877099dd-1890-4bd1-b017-490ac4fd7550
-    m_ActionName: PlayableCharacter/Move[/Keyboard/q,/Keyboard/w,/Keyboard/e,/Keyboard/r,/Keyboard/t,/Keyboard/y,/Keyboard/u,/Keyboard/i,/Keyboard/o,/Keyboard/p,/Keyboard/a,/Keyboard/s,/Keyboard/d,/Keyboard/f,/Keyboard/g,/Keyboard/h,/Keyboard/j,/Keyboard/k,/Keyboard/l,/Keyboard/semicolon,/Keyboard/z,/Keyboard/x,/Keyboard/c,/Keyboard/v,/Keyboard/b,/Keyboard/n,/Keyboard/m,/Keyboard/comma,/Keyboard/period,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0,/Keyboard/minus]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerManager
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &979721775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979721773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a9378ffff95d114dbd32aaa5d493829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DirectionManager: {fileID: 11400000, guid: 35d5d31781f8787468d661ec29a5db79, type: 2}
-  m_CharactersPrefabs:
-  - {fileID: 3727033154009427300, guid: f9ef6bc3d0e7d294d8f75008b862fab0, type: 3}
-  - {fileID: 3727033154009427300, guid: c560430509367d8408befbf00a3b5e95, type: 3}
-  - {fileID: 3727033154009427300, guid: f44d49eaa5289554989b86a0b7a2973e, type: 3}
-  - {fileID: 3727033154009427300, guid: 7abda42f906156244980042fdd0cfced, type: 3}
---- !u!4 &979721776
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979721773}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991796621
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,3 +299,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &7127670766578180924
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117772, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127670767012117777, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
+      propertyPath: m_Name
+      value: CharactersManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 934e4f2772e9e5245beaefd80dbc8928, type: 3}
