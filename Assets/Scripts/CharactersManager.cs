@@ -5,6 +5,20 @@ using UnityEngine.InputSystem;
 
 public class CharactersManager : MonoBehaviour
 {
+    private GameState m_CurrentGameState = GameState.WaitingForPlayers;
+    public GameState a_CurrentGameState 
+    { set 
+        { 
+            m_CurrentGameState = value;
+            if (m_CurrentGameState != GameState.Playing)
+            {
+                m_GridManager.StopGame();
+            }
+        } 
+        get { return m_CurrentGameState; } 
+    }
+    [SerializeField]
+    private GameManager m_GameManager = null;
     [SerializeField]
     private DirectionManager m_DirectionManager = null;
     [SerializeField]
@@ -13,6 +27,7 @@ public class CharactersManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> m_CharactersPrefabs = null;
     private int m_CurrentPlayerCount = 0;
+
 
     //Called when any binded key is pressed
     public void CreateCharacter(InputAction.CallbackContext p_Context)
@@ -25,12 +40,12 @@ public class CharactersManager : MonoBehaviour
                 //We tell the PlayableCharacter his input has been pressed
                 l_PlayableCharacter.InputPressed();
             }
-            else
+            else if(m_CurrentGameState == GameState.WaitingForPlayers)
             {
                 if (m_CurrentPlayerCount != m_CharactersPrefabs.Count)
                 {
                     //Else we spawn a new PlayableCharacter
-                    PlayerInput l_NewPlayer = PlayerInput.Instantiate(m_CharactersPrefabs[m_CurrentPlayerCount]);
+                    GameObject l_NewPlayer = Instantiate(m_CharactersPrefabs[m_CurrentPlayerCount]);
                     PlayableCharacter l_NewCharacter = l_NewPlayer.GetComponent<PlayableCharacter>();
                     //Assign it his input (which the one that was just pressed)
                     l_NewCharacter.a_MainControl = p_Context.control;
@@ -42,8 +57,23 @@ public class CharactersManager : MonoBehaviour
                     m_CharactersList.Add(p_Context.control, l_NewCharacter);
 
                     //SPAWNING CHARACTER
-                    l_NewCharacter.a_GridManager.MakePlayer(5, 5);
-                    l_NewCharacter.transform.position = l_NewCharacter.a_GridManager.m_GridOffset * new Vector3(5, 0, 5);
+                    bool l_Spawning = true;
+                    int l_WatchDog = 0;
+                    while (l_Spawning)
+                    {
+                        Vector2Int l_GridPosition = new Vector2Int(Random.Range(0, m_GridManager.a_Grid.GetLength(0)), Random.Range(0, m_GridManager.a_Grid.GetLength(1)));
+                        if (m_GridManager.a_Grid[l_GridPosition.x, l_GridPosition.y] == CaseState.Empty)
+                        {
+                            m_GridManager.MakePlayer(l_GridPosition.x, l_GridPosition.y);
+                            l_NewCharacter.transform.position = m_GridManager.m_GridOffset * new Vector3(l_GridPosition.x, 0, l_GridPosition.y);
+                            l_Spawning = false;
+                        }
+                        l_WatchDog = l_WatchDog + 1;
+                        if (l_WatchDog >= 100)
+                        {
+                            l_Spawning = false;
+                        }
+                    }
 
 
                     //Then we call the function for newly joined players
@@ -57,10 +87,26 @@ public class CharactersManager : MonoBehaviour
         }
     }
 
+    public void StartGame(InputAction.CallbackContext p_Context)
+    {
+        if (p_Context.started)
+        {
+            Debug.Log("START PLAYING DUDES! ");
+            m_CurrentGameState = GameState.Playing;
+            m_GridManager.StartGame();
+        }
+    }
 
     private void NewPlayerJoined(PlayableCharacter p_NewPlayer)
     {
         m_CurrentPlayerCount = m_CurrentPlayerCount + 1;
         Debug.Log(p_NewPlayer + " JOINED !");
+    }
+    public enum GameState
+    {
+        WaitingForPlayers,
+        Playing,
+        GameLost,
+        GameWon,
     }
 }

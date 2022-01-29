@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
 {
 
     private CaseState[,] m_Grid;
+    public CaseState[,] a_Grid { get { return m_Grid; } }
 
     private GameObject[,] m_ObjGrid;
 
@@ -85,15 +86,27 @@ public class GridManager : MonoBehaviour
                 m_ObjGrid[i, j] = Instantiate(m_GridCase, new Vector3(i * m_GridOffset, 0, j * m_GridOffset), Quaternion.identity, transform);
             }
         }
+    }
+    public void StartGame()
+    {
         for (int k = 0; k < 6; k++)
         {
             if (k < 3)
             {
                 MakeOrbRandom(CaseState.OrbeCalme);
-            } else
+            }
+            else
             {
                 MakeOrbRandom(CaseState.OrbeChaos);
             }
+        }
+    }
+    public void StopGame()
+    {
+        foreach (OrbScript l_Orb in FindObjectsOfType<OrbScript>())
+        {
+            MakeEmpty((int)l_Orb.transform.position.x / m_GridOffset, (int)l_Orb.transform.position.z / m_GridOffset);
+            Destroy(l_Orb.gameObject);
         }
     }
 

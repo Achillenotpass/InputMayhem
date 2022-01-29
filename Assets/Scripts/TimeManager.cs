@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
-
+    [SerializeField]
+    private CharactersManager m_CharactersManager = null;
     private float m_Timer;
 
     private int m_CalmOrbs, m_ChaosOrbs = 0;
@@ -47,20 +48,38 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_Timer += Time.deltaTime;
-        m_TimerText.text = m_Timer.ToString("F2");
-
-        m_GaugeValue += (m_GaugeMovingValue.x / m_GaugeMovingValue.y * Time.deltaTime);
-
-        if (m_GaugeMovingValue.x > 0)
+        switch (m_CharactersManager.a_CurrentGameState)
         {
-            m_GaugeMovingValue.x += (m_GaugeValueIncrease / m_GaugeMovingValue.y * Time.deltaTime);
-        } else
-        {
-            m_GaugeMovingValue.x -= (m_GaugeValueIncrease / m_GaugeMovingValue.y * Time.deltaTime);
+            case CharactersManager.GameState.WaitingForPlayers:
+                break;
+            case CharactersManager.GameState.Playing:
+                m_Timer += Time.deltaTime;
+                m_TimerText.text = m_Timer.ToString("F2");
+
+                m_GaugeValue += (m_GaugeMovingValue.x / m_GaugeMovingValue.y * Time.deltaTime);
+
+                if (m_GaugeMovingValue.x > 0)
+                {
+                    m_GaugeMovingValue.x += (m_GaugeValueIncrease / m_GaugeMovingValue.y * Time.deltaTime);
+                }
+                else
+                {
+                    m_GaugeMovingValue.x -= (m_GaugeValueIncrease / m_GaugeMovingValue.y * Time.deltaTime);
+                }
+
+                m_slider.value = m_GaugeValue / 100f;
+
+                if (m_GaugeValue >= 100.0f || m_GaugeValue <= 0.0f)
+                {
+                    LoseGame();
+                }
+                break;
+            case CharactersManager.GameState.GameLost:
+                break;
+            case CharactersManager.GameState.GameWon:
+            default:
+                break;
         }
-
-        m_slider.value = m_GaugeValue / 100f;
     }
 
     public void addToGaugeValue(float p_value)
@@ -76,10 +95,12 @@ public class TimeManager : MonoBehaviour
         if (m_GaugeValue > 100)
         {
             m_GaugeValue = 100;
+            LoseGame();
         }
         else if (m_GaugeValue < 0)
         {
             m_GaugeValue = 0;
+            LoseGame();
         }
 
         if (ChaosGrowing && (m_CalmOrbs - m_ChaosOrbs >= m_orbsDifference)) 
@@ -103,6 +124,12 @@ public class TimeManager : MonoBehaviour
     public void addChaosOrb()
     {
         addToGaugeValue(-addValue);
+    }
+
+    private void LoseGame()
+    {
+        Debug.Log("oui");
+        m_CharactersManager.a_CurrentGameState = CharactersManager.GameState.GameLost;
     }
 
     //placeholder
