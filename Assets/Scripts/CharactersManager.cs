@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class CharactersManager : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class CharactersManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> m_CharactersPrefabs = null;
     private int m_CurrentPlayerCount = 0;
+
+    [SerializeField]
+    private UnityEvent m_GameStarting = null;
 
 
     public void PlayerInputPressed(InputAction.CallbackContext p_Context)
@@ -94,6 +98,7 @@ public class CharactersManager : MonoBehaviour
         {
             Debug.Log("START PLAYING DUDES! ");
             m_CurrentGameState = GameState.Playing;
+            m_GameStarting.Invoke();
             m_GridManager.StartGame();
         }
         else if (p_Context.started && m_CurrentGameState == GameState.GameLost)
