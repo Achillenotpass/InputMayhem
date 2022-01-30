@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public class LaRoueTourneVaTourner : MonoBehaviour
@@ -26,11 +27,11 @@ public class LaRoueTourneVaTourner : MonoBehaviour
 
     private float m_CountdownValue = 3f;
 
-    public bool tourne = false;
-
     private float m_Timer = 3;
 
     private bool m_Counting = false;
+    [SerializeField]
+    private UnityEvent m_TurnEvent = null;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class LaRoueTourneVaTourner : MonoBehaviour
                 m_CountdownValue = 3;
                 m_Timer = 3;
                 m_CountdownText.text = "" + 0;
+                m_TurnEvent.Invoke();
                 transform.DORotate(transform.rotation.eulerAngles - new Vector3(0, 0, -m_Rotation), m_RotationSpeed, RotateMode.Fast);
 
                 //ICI ROTATION ET CHANGEMENT INPUT
@@ -72,14 +74,6 @@ public class LaRoueTourneVaTourner : MonoBehaviour
     {
         m_Counting = true;
         m_Rotation = p_Rotation;
-    }
-
-    private void OnValidate()
-    {
-        if (tourne)
-        {
-            LaRoueTourne(270f);
-        }
     }
 
 }

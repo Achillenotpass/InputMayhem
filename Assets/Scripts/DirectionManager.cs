@@ -47,6 +47,11 @@ public class DirectionManager : ScriptableObject
             ListToChange[l_TempInt] = l_TempInputDirection[i];
         }
     }
+
+    public void Resetgame()
+    {
+        m_GameInputDirection = new List<Direction>(m_InputDirection);
+    }
 }
 
 

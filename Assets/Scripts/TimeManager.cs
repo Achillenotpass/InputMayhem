@@ -65,6 +65,8 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_CharactersManager.a_DirectionManager.Resetgame();
+
         StartCoroutine(ChangeInputDirections());
 
         m_Gradient = new Gradient();
@@ -128,6 +130,20 @@ public class TimeManager : MonoBehaviour
     {
         while (true)
         {
+            if (m_CharactersManager.a_CurrentGameState == CharactersManager.GameState.Playing)
+            {
+                break;
+            }
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(10.0f);
+        while (true)
+        {
+            if (m_CharactersManager.a_CurrentGameState == CharactersManager.GameState.GameLost)
+            {
+                break;
+            }
             yield return new WaitForSeconds(1.0f);
             if (Random.Range(0.0f, 100.0f) <= m_DirectionChangeChance)
             {
