@@ -51,11 +51,15 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private Color m_CalmColor;
 
+    [SerializeField]
+    private float m_LerpValue = 0.5f;
+
     private GradientColorKey[] m_ColorKey;
 
     private GradientAlphaKey[] m_AlphaKey;
 
     //placeholder
+
     public bool addChaos = false;
 
     public bool addCalme = false;
@@ -110,8 +114,11 @@ public class TimeManager : MonoBehaviour
                 {
                     m_GaugeMovingValue.x -= (m_GaugeValueIncrease / m_GaugeMovingValue.y * Time.deltaTime);
                 }
-
-                m_slider.value = m_GaugeValue / 100f;
+                if (m_slider.value != m_GaugeValue / 100f)
+                {
+                    m_slider.value = Mathf.Lerp(m_slider.value, m_GaugeValue / 100f, m_LerpValue);
+                }
+                //m_slider.value = m_GaugeValue / 100f;
 
                 if (m_GaugeValue >= 100.0f || m_GaugeValue <= 0.0f)
                 {
