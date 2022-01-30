@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField]
+    private float m_DirectionChangeChance = 5.0f;
+    [SerializeField]
     private CharactersManager m_CharactersManager = null;
     //timer global, permet de stocker le score
     private float m_Timer;
@@ -63,6 +65,8 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(ChangeInputDirections());
+
         m_Gradient = new Gradient();
         m_ColorKey = new GradientColorKey[2];
         m_ColorKey[0].color = m_ChaosColor;
@@ -120,6 +124,21 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    private IEnumerator ChangeInputDirections()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            Debug.Log("if");
+            if (Random.Range(0.0f, 100.0f) <= m_DirectionChangeChance)
+            {
+                Debug.Log("control changed");
+                m_CharactersManager.a_DirectionManager.ChangeInputs();
+            }
+
+            yield return null;
+        }
+    }
     public void addToGaugeValue(float p_value)
     {
         if (p_value > 0)

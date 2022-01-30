@@ -33,6 +33,7 @@ public class CharactersManager : MonoBehaviour
     private GameManager m_GameManager = null;
     [SerializeField]
     private DirectionManager m_DirectionManager = null;
+    public DirectionManager a_DirectionManager { get { return m_DirectionManager; } }
     [SerializeField]
     private GridManager m_GridManager = null;
     private Dictionary<InputAction, PlayableCharacter> m_CharactersList = new Dictionary<InputAction, PlayableCharacter>();

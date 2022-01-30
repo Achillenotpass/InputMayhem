@@ -6,19 +6,33 @@ using UnityEngine;
 public class DirectionManager : ScriptableObject
 {
     [SerializeField]
-    private List<Direction> InputDirection = new List<Direction>();
+    private List<Direction> m_InputDirection = new List<Direction>();
+    private List<Direction> m_GameInputDirection = null;
     public Direction GetDirectionFromInput(int p_InputCount)
     {
-        if (p_InputCount >= InputDirection.Count)
+        if (m_GameInputDirection.Count == 0)
         {
-            p_InputCount = InputDirection.Count;
+            m_GameInputDirection = new List<Direction>(m_InputDirection);
         }
-        return InputDirection[p_InputCount - 1];
+        if (p_InputCount >= m_GameInputDirection.Count)
+        {
+            p_InputCount = m_GameInputDirection.Count;
+        }
+        return m_GameInputDirection[p_InputCount - 1];
+    }
+
+    public void ChangeInputs()
+    {
+        if (m_GameInputDirection.Count == 0)
+        {
+            m_GameInputDirection = new List<Direction>(m_InputDirection);
+        }
+        ArrayMoveAllElement(Random.Range(1, 4), m_GameInputDirection);
     }
 
     //This function move all element in array to the next MoveAmount index
     //Try with List<T> to make the function hyper-generic
-    public void ArrayMoveAllElement(int MoveAmount, List<Direction> ListToChange)
+    private void ArrayMoveAllElement(int MoveAmount, List<Direction> ListToChange)
     {
         List<Direction> l_TempInputDirection = new List<Direction>(ListToChange);
         for (int i = 0; i < l_TempInputDirection.Count; i++)
