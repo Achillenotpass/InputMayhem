@@ -172,4 +172,9 @@ public class CharactersManager : MonoBehaviour
         GameLost,
         GameWon,
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
