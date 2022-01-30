@@ -33,6 +33,9 @@ public class LaRoueTourneVaTourner : MonoBehaviour
     [SerializeField]
     private UnityEvent m_TurnEvent = null;
 
+    [SerializeField]
+    private UnityEvent m_TicEvent = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,11 +63,12 @@ public class LaRoueTourneVaTourner : MonoBehaviour
             }
             if (m_Timer < m_CountdownValue && m_CountdownValue > 0)
             {
-                Debug.Log(m_CountdownValue);
+                m_TicEvent.Invoke();
                 m_CountdownText.text = "" + m_CountdownValue;
                 m_CountdownValue -= 1;
                 m_CountdownText.DOFade(1f, 0f);
                 m_CountdownText.DOFade(0f, m_Fade_Duration);
+
             }
         }
     }
