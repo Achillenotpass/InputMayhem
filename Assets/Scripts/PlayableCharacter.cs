@@ -8,11 +8,15 @@ public class PlayableCharacter : MonoBehaviour
     //This is the character's name that will be used for, like, uh, I don't know
     [SerializeField]
     private string m_CharacterName = string.Empty;
+    [SerializeField]
+    private List<AudioClip> m_JumpSound = null;
+
     private DirectionManager m_DirectionManager = null;
     public DirectionManager a_DirectionManager { set { m_DirectionManager = value; } get { return m_DirectionManager; } }
     private GridManager m_GridManager = null;
     public GridManager a_GridManager { set { m_GridManager = value; } get { return m_GridManager; } }
     private Animator m_Animator = null;
+    private AudioSource m_AudioSource = null;
     //This is the main input of that character
     //The only keyboard key that will act on him
     private InputControl m_MainControl = null;
@@ -26,6 +30,7 @@ public class PlayableCharacter : MonoBehaviour
     private void Awake()
     {
         m_Animator = GetComponentInChildren<Animator>();
+        m_AudioSource = GetComponentInChildren<AudioSource>();
     }
 
     public void InputPressed()
@@ -140,6 +145,8 @@ public class PlayableCharacter : MonoBehaviour
         float l_AnimationTime = 0.3f;
         float l_Timer = 0.0f;
         m_Animator.SetTrigger("Jump");
+        m_AudioSource.pitch = Random.Range(0.9f, 1.1f);
+        m_AudioSource.PlayOneShot(m_JumpSound[Random.Range(0, m_JumpSound.Count)]);
         yield return new WaitForSeconds(0.15f);
         UpdatePlayerOnGrid(p_Direction.x, p_Direction.z);
         
