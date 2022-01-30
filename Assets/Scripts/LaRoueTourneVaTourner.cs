@@ -51,7 +51,10 @@ public class LaRoueTourneVaTourner : MonoBehaviour
                 m_CountdownValue = 3;
                 m_Timer = 3;
                 m_CountdownText.text = "" + 0;
-                transform.DORotate(transform.rotation.eulerAngles - new Vector3(0, 0, m_Rotation), m_RotationSpeed, RotateMode.Fast);
+                transform.DORotate(transform.rotation.eulerAngles - new Vector3(0, 0, -m_Rotation), m_RotationSpeed, RotateMode.Fast);
+
+                //ICI ROTATION ET CHANGEMENT INPUT
+                FindObjectOfType<CharactersManager>().a_DirectionManager.ChangeInputs(m_Rotation);
             }
             if (m_Timer < m_CountdownValue && m_CountdownValue > 0)
             {
@@ -64,6 +67,7 @@ public class LaRoueTourneVaTourner : MonoBehaviour
         }
     }
 
+    //APPELER CA POUR CHANGER INPUT
     public void LaRoueTourne(float p_Rotation)
     {
         m_Counting = true;

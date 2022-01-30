@@ -21,13 +21,13 @@ public class DirectionManager : ScriptableObject
         return m_GameInputDirection[p_InputCount - 1];
     }
 
-    public void ChangeInputs()
+    public void ChangeInputs(float p_RotationAngle)
     {
         if (m_GameInputDirection.Count == 0)
         {
             m_GameInputDirection = new List<Direction>(m_InputDirection);
         }
-        ArrayMoveAllElement(Random.Range(1, 4), m_GameInputDirection);
+        ArrayMoveAllElement((int)(p_RotationAngle / 90.0f), m_GameInputDirection);
     }
 
     //This function move all element in array to the next MoveAmount index

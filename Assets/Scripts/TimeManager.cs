@@ -129,11 +129,11 @@ public class TimeManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.0f);
-            Debug.Log("if");
             if (Random.Range(0.0f, 100.0f) <= m_DirectionChangeChance)
             {
-                Debug.Log("control changed");
-                m_CharactersManager.a_DirectionManager.ChangeInputs();
+                int l_RandomAngle = Random.Range(1, 4) * 90;
+                FindObjectOfType<LaRoueTourneVaTourner>().LaRoueTourne((float)l_RandomAngle);
+                yield return new WaitForSeconds(5.0f);
             }
 
             yield return null;
