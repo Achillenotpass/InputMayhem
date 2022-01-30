@@ -22,6 +22,8 @@ public class OrbScript : MonoBehaviour
 
     public float m_Lifespan;
 
+    private bool m_IsDying = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class OrbScript : MonoBehaviour
     {
         m_Timer += Time.deltaTime;
 
-        if (m_Timer >= m_Lifespan)
+        if (m_Timer >= m_Lifespan && !m_IsDying)
         {
             Death();
         }
@@ -55,6 +57,7 @@ public class OrbScript : MonoBehaviour
 
     void Death()
     {
+        m_IsDying = true;
         //temporaire
         m_GridManager.MakeEmpty(m_X, m_Y);
         
